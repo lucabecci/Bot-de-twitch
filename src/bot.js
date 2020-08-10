@@ -1,5 +1,6 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
+
 //Configuramos nuestro bot
 const options = {
     options: {
@@ -9,8 +10,8 @@ const options = {
         reconnect: true
     },
     identity: {
-        username: "oauth:tbdtjjq0c7ub4ew55n8r7p9e1iqm5h",
-        password: "lucadevbot"
+        username: "lucadevbot",
+        password: "oauth:tbdtjjq0c7ub4ew55n8r7p9e1iqm5h"
     },
     channels: ['lucadevbot']
 }
@@ -26,7 +27,7 @@ client.on('connected', (addres, port) =>{
     client.action('lucadevbot', `hello ${addres}: ${port}`)
 })
 
-client.on('chat', async(target, ctx, message, self) =>{
+client.on('chat', (target, ctx, message, self) =>{
     if(self) return;
     //Sacamos los espacios del comando para despues validarlo
     const commandName = message.trim()
