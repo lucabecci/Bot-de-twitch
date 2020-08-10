@@ -1,6 +1,5 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
-
 //Configuramos nuestro bot
 const options = {
     options: {
@@ -10,8 +9,8 @@ const options = {
         reconnect: true
     },
     identity: {
-        username: "lucadevbot",
-        password: "oauth:tbdtjjq0c7ub4ew55n8r7p9e1iqm5h"
+        username: process.env.SECRET_USER,
+        password: process.env.SECRET_TOKEN
     },
     channels: ['lucadevbot']
 }
