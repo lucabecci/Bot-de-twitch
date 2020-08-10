@@ -9,8 +9,8 @@ const options = {
         reconnect: true
     },
     identity: {
-        username: process.env.SECRET_USER,
-        password: process.env.SECRET_TOKEN
+        username: "oauth:tbdtjjq0c7ub4ew55n8r7p9e1iqm5h",
+        password: "lucadevbot"
     },
     channels: ['lucadevbot']
 }
@@ -21,9 +21,9 @@ client.connect();
 
 //Hacemos que el bot envie un mensaje al estar conectado al canal
 
-client.on('connected', async(addres, port) =>{
+client.on('connected', (addres, port) =>{
     //creamos una accion para el canal
-    await client.action('lucadevbot', `hello ${addres}: ${port}`)
+    client.action('lucadevbot', `hello ${addres}: ${port}`)
 })
 
 client.on('chat', async(target, ctx, message, self) =>{
@@ -33,6 +33,6 @@ client.on('chat', async(target, ctx, message, self) =>{
 
     //Validamos el mensaje segun la accion que queremos
     if( commandName === '!say'){
-        await client.say(target, `Welcome ${ctx.username}`)
+        client.say(target, `Welcome ${ctx.username}`)
     }
 })
