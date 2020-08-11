@@ -1,5 +1,7 @@
 const tmi = require('tmi.js');
 require('dotenv').config();
+const firstCommands = require('./firstFunctions')
+const spamText = require('./spamModule')
 //Configuramos nuestro bot
 const options = {
     options: {
@@ -23,7 +25,13 @@ client.connect();
 
 client.on('connected', (addres, port) =>{
     //creamos una accion para el canal
-    client.action('lucadevbot', `hello ${addres}: ${port}`)
+    // client.action('lucadevbot', `hello ${addres}: ${port}`)
+    
+        setInterval(() =>{
+            client.action('lucadevbot', spamText())  
+        }, 30000);
+
+            
 })
 
 client.on('chat', (target, ctx, message, self) =>{
@@ -31,8 +39,8 @@ client.on('chat', (target, ctx, message, self) =>{
     //Sacamos los espacios del comando para despues validarlo
     const commandName = message.trim()
 
-    //Validamos el mensaje segun la accion que queremos
-    if( commandName === '!say'){
-        client.say(target, `Welcome ${ctx.username}`)
-    }
+    /*enviamos el mensaje a una funcion
+     y validamos si el comando existe*/
+    const resp = firstCommands(commandName, ctx)
+    client.say(target, resp)
 })
